@@ -1,0 +1,53 @@
+.mt-6 {
+    margin-top: 6rem !important;
+}
+.mt-7 {
+    margin-top: 7rem !important;
+}
+.mt-8 {
+    margin-top: 8rem !important;
+}
+
+/* Fix white background issue */
+#toast-container > div {
+    opacity: 1 !important;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 6px !important;
+    padding: 10px 15px !important;
+    color: #fff !important;
+    font-size: 14px !important;
+}
+
+/* Success */
+.toast-success {
+    background-color: #35a989 !important; /* Agroxa success green */
+}
+
+/* Info */
+.toast-info {
+    background-color: #17a2b8 !important; /* Agroxa info blue */
+}
+
+/* Warning */
+.toast-warning {
+    background-color: #ffc107 !important; /* Agroxa yellow */
+    color: #000 !important; /* better readability */
+}
+
+/* Error */
+.toast-error {
+    background-color: #dc3545 !important; /* Agroxa danger red */
+}
+
+/* Add close button styling */
+.toast-close-button {
+    color: #fff !important;
+    opacity: 1 !important;
+    font-size: 20px !important;
+}
+.toast-message{
+    padding-left: 10% !important;
+}
+.toast-close-button{
+    margin-top: 2% !important;
+}
