@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\AgencyController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FinalStatusController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -22,13 +26,24 @@ Route::middleware('auth')->group(function () {
     // Projects
     Route::resource('projects', ProjectController::class);
     Route::patch('projects/{id}/toggle-status', [ProjectController::class, 'toggleStatus'])->name('projects.toggleStatus');
-    Route::match(['get', 'post'], 'projects/collection/entry', [ProjectController::class, 'collection_entry'])->name('projects.collectionEntry');
+    Route::get('projects/collection/entry', [ProjectController::class, 'collection_entry'])->name('projects.collectionEntry');
+    Route::post('projects/collection/entry/store', [ProjectController::class, 'store_collection_entry'])->name('projects.collectionEntry.store');
+    Route::get('projects/collection/view/{id}', [ProjectController::class, 'collection_view'])->name('projects.collectionView');
+    Route::get('/projects/{project}/collection-export', [ProjectController::class, 'collectionExport'])->name('projects.collectionExport');
+    Route::get('/collection-entry/{id}/edit', [ProjectController::class, 'collection_entry_edit'])->name('projects.collectionEntry.edit');
+    Route::put('/collection-entry/{id}', [ProjectController::class, 'update_collection_entry'])->name('projects.collectionEntry.update');
+    Route::delete('/collection-entry/{id}', [ProjectController::class, 'destroy_collection_entry'])->name('projects.collectionEntry.destroy');
+
     // User
     Route::resource('user', UserController::class);
     Route::get('user-datatable', [UserController::class, 'dataTable'])->name('user.datatable');
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
-    // Permission
+    Route::resource('agency', AgencyController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('final-status', FinalStatusController::class);
+    Route::resource('company', CompanyController::class);
+
     Route::resource('permission', PermissionController::class);
     Route::get('permission-datatable', [PermissionController::class, 'dataTable'])->name('permission.datatable');
 
@@ -40,9 +55,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-
-
-
 Route::get('/clear', function () {
     Artisan::call('cache:forget spatie.permission.cache');
     Artisan::call('cache:clear');
