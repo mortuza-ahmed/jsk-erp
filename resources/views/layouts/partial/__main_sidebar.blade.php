@@ -53,7 +53,7 @@
             @endcan
             {{-- projects --}}
             @php
-                $subMenu = ['projects.index', 'projects.create', 'projects.edit'];
+                $subMenu = ['projects.index', 'projects.create', 'projects.edit', 'projects.collectionEntry'];
             @endphp
             <li class="{{ in_array(Route::currentRouteName(), $subMenu) ? 'mm-active' : '' }}">
                 <a href="javascript:void(0);"
@@ -64,17 +64,64 @@
                 <ul class="sub-menu">
 
                     @php
-                        $subSubMenu = ['projects.index', 'projects.create', 'projects.edit','projects.collectionEntry'];
+                        $subSubMenu = ['projects.index', 'projects.create', 'projects.edit'];
                     @endphp
                     <li class="{{ in_array(Route::currentRouteName(), $subSubMenu) ? 'mm-active' : '' }}">
                         <a href="{{ route('projects.index') }}">Project Lists</a>
                     </li>
+                    @php
+                        $subSubMenu = ['projects.collectionEntry'];
+                    @endphp
                     <li class="{{ in_array(Route::currentRouteName(), $subSubMenu) ? 'mm-active' : '' }}">
                         <a href="{{ route('projects.collectionEntry') }}">Collection Entry</a>
                     </li>
                 </ul>
             </li>
             {{-- end projects --}}
+            {{-- agency --}}
+            @php
+                $subMenu = ['agency.index', 'agency.create', 'agency.edit'];
+            @endphp
+            <li class="{{ in_array(Route::currentRouteName(), $subMenu) ? 'mm-active' : '' }}">
+                <a href="{{ route('agency.index') }}" class="waves-effect">
+                    <i class="mdi mdi-domain"></i>
+                    <span>Agencies</span>
+                </a>
+            </li>
+            {{-- end agency --}}
+            {{-- category --}}
+            @php
+                $subMenu = ['categories.index', 'categories.create', 'categories.edit'];
+            @endphp
+            <li class="{{ in_array(Route::currentRouteName(), $subMenu) ? 'mm-active' : '' }}">
+                <a href="{{ route('categories.index') }}" class="waves-effect">
+                    <i class="mdi mdi-shape-outline"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+            {{-- end category --}}
+            {{-- final status --}}
+            @php
+                $subMenu = ['final-status.index', 'final-status.create', 'final-status.edit'];
+            @endphp
+            <li class="{{ in_array(Route::currentRouteName(), $subMenu) ? 'mm-active' : '' }}">
+                <a href="{{ route('final-status.index') }}" class="waves-effect">
+                    <i class="mdi mdi-flag-checkered"></i>
+                    <span>Final Status</span>
+                </a>
+            </li>
+            {{-- end final status --}}
+            {{-- company --}}
+            @php
+                $subMenu = ['company.index', 'company.create', 'company.edit'];
+            @endphp
+            <li class="{{ in_array(Route::currentRouteName(), $subMenu) ? 'mm-active' : '' }}">
+                <a href="{{ route('company.index') }}" class="waves-effect">
+                    <i class="mdi mdi-office-building-outline"></i>
+                    <span>Companies</span>
+                </a>
+            </li>
+            {{-- end company --}}
             @can('user')
                 <li class="{{ Route::currentRouteName() == 'user.index' ? 'mm-active' : '' }}">
                     <a href="{{ route('user.index') }}" class="waves-effect">
